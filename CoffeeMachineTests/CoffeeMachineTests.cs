@@ -7,6 +7,9 @@ namespace CoffeeMachineTests
 {
     public class AcceptanceTests
     {
+        private const string CAPPUCINO = "Cappucino";
+        private const string EXPRESSO = "Expresso";
+        private const string ALLONGER = "Allongé";
         private readonly decimal _waterPrice = new(0.2);
         private readonly decimal _coffeePrice = new(1);
         private readonly decimal _creamPrice = new(0.5);
@@ -22,12 +25,12 @@ namespace CoffeeMachineTests
         {
             return new()
             {
-                {"Expresso", new Beverage(new List<IIngredient> {new Coffee(), new Water()})},
+                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()})},
                 {
-                    "Cappucino", new Beverage(new List<IIngredient>
+                    CAPPUCINO, new Beverage(new List<IIngredient>
                         {new Coffee(), new Water(), new Cream(), new Chocolate()})
                 },
-                {"Allongé", new Beverage(new List<IIngredient> {new Coffee(), new Water(2)})},
+                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)})},
             };
         }
 
@@ -36,7 +39,7 @@ namespace CoffeeMachineTests
         {
             decimal expressoPrice = _waterPrice + _coffeePrice;
 
-            decimal price = _pricer.Command("Expresso");
+            decimal price = _pricer.Command(EXPRESSO);
 
             decimal margin = expressoPrice * new decimal(0.3);
             price.Should().Be(expressoPrice + margin);
@@ -47,7 +50,7 @@ namespace CoffeeMachineTests
         {
             decimal elongated = _waterPrice * 2 + _coffeePrice;
 
-            decimal price = _pricer.Command("Allongé");
+            decimal price = _pricer.Command(ALLONGER);
 
             decimal margin = elongated * new decimal(0.3);
             price.Should().Be(elongated + margin);
@@ -58,7 +61,7 @@ namespace CoffeeMachineTests
         {
             decimal cappucinno = _waterPrice + _coffeePrice + _chocolatePrice + _creamPrice;
 
-            decimal price = _pricer.Command("Cappucino");
+            decimal price = _pricer.Command(CAPPUCINO);
 
             decimal margin = cappucinno * new decimal(0.3);
             price.Should().Be(cappucinno + margin);
