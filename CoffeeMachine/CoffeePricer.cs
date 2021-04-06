@@ -1,19 +1,31 @@
-﻿namespace CoffeeMachine
+﻿using System;
+
+namespace CoffeeMachine
 {
     public class CoffeePricer : ICoffeePricer
     {
         public decimal Command(string beverage)
         {
+            decimal waterPrice = new(0.2);
+            decimal coffeeOrChocolate = new(1);
+            decimal cream = new(0.5);
+            
             if (beverage is "Expresso")
             {
-                return new(1.2);
+                return coffeeOrChocolate + waterPrice;
             }
 
             if (beverage is "Cappucino")
             {
-                return new decimal(1) + new decimal(0.2) + new decimal(0.5) + new decimal(1);
+                return coffeeOrChocolate + waterPrice + cream + coffeeOrChocolate;
             }
-            return new(1.4);
+
+            if (beverage is "Allongé")
+            {
+                return coffeeOrChocolate + waterPrice * 2;
+            }
+
+            throw new Exception();
         }
     }
 }
