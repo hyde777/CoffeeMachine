@@ -1,4 +1,5 @@
-﻿using CoffeeMachine;
+﻿using System.Collections.Generic;
+using CoffeeMachine;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -10,14 +11,27 @@ namespace CoffeeMachineTests
         private readonly decimal _coffeePrice = new(1);
         private readonly decimal _creamPrice = new(0.5);
         private readonly decimal _chocolatePrice = new(1);
+        private readonly ICoffeePricer _pricer;
+
+        public AcceptanceTests()
+        {
+            _pricer = new CoffeePricer(new()
+            {
+                {"Expresso", new Beverage(new List<IIngredient> {new Coffee(), new Water()})},
+                {
+                    "Cappucino", new Beverage(new List<IIngredient>
+                        {new Coffee(), new Water(), new Cream(), new Chocolate()})
+                },
+                {"Allongé", new Beverage(new List<IIngredient> {new Coffee(), new Water(), new Water()})},
+            });
+        }
 
         [Test]
         public void ShouldPriceAnExpresso()
         {
             decimal expressoPrice = _waterPrice + _coffeePrice;
-            ICoffeePricer pricer = new CoffeePricer();
 
-            decimal price = pricer.Command("Expresso");
+            decimal price = _pricer.Command("Expresso");
 
             price.Should().Be(expressoPrice);
         }
@@ -26,9 +40,8 @@ namespace CoffeeMachineTests
         public void ShouldPriceAnElongated()
         {
             decimal elongated = _waterPrice * 2 + _coffeePrice;
-            ICoffeePricer pricer = new CoffeePricer();
 
-            decimal price = pricer.Command("Allongé");
+            decimal price = _pricer.Command("Allongé");
 
             price.Should().Be(elongated);
         }
@@ -36,11 +49,9 @@ namespace CoffeeMachineTests
         [Test]
         public void ShouldPriceACapuccino()
         {
-          
             decimal cappucinno = _waterPrice + _coffeePrice + _chocolatePrice + _creamPrice;
-            ICoffeePricer pricer = new CoffeePricer();
 
-            decimal price = pricer.Command("Cappucino");
+            decimal price = _pricer.Command("Cappucino");
             
             price.Should().Be(cappucinno);
         }
