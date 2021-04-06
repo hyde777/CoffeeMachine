@@ -15,15 +15,20 @@ namespace CoffeeMachineTests
 
         public AcceptanceTests()
         {
-            _pricer = new CoffeePricer(new()
+            _pricer = new CoffeePricer(Recipes());
+        }
+
+        private Dictionary<string, IBeverage> Recipes()
+        {
+            return new()
             {
                 {"Expresso", new Beverage(new List<IIngredient> {new Coffee(), new Water()})},
                 {
                     "Cappucino", new Beverage(new List<IIngredient>
                         {new Coffee(), new Water(), new Cream(), new Chocolate()})
                 },
-                {"Allongé", new Beverage(new List<IIngredient> {new Coffee(), new Water(), new Water()})},
-            });
+                {"Allongé", new Beverage(new List<IIngredient> {new Coffee(), new Water(2)})},
+            };
         }
 
         [Test]
