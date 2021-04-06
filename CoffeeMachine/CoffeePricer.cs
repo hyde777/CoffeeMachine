@@ -4,7 +4,12 @@
     {
         public decimal Command(string beverage)
         {
-            return new(1.2);
+            if (beverage is "Expresso")
+            {
+                return new(1.2);
+            }
+
+            return new(1.4);
         }
     }
 }
