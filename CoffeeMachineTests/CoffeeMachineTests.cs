@@ -11,11 +11,11 @@ namespace CoffeeMachineTests
         {
             decimal waterPrice = new(0.2);
             decimal coffeePrice = new(1);
+            decimal expressoPrice = waterPrice + coffeePrice;
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Expresso");
 
-            decimal expressoPrice = waterPrice + coffeePrice;
             price.Should().Be(expressoPrice);
         }
 
@@ -24,11 +24,11 @@ namespace CoffeeMachineTests
         {
             decimal waterPrice = new(0.2);
             decimal coffeePrice = new(1);
+            decimal elongated = waterPrice * 2 + coffeePrice;
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Allongé");
 
-            decimal elongated = waterPrice * 2 + coffeePrice;
             price.Should().Be(elongated);
         }
 
@@ -40,7 +40,6 @@ namespace CoffeeMachineTests
             decimal creamPrice = new(0.5);
             decimal chocolatePrice = new(1);
             decimal cappucinno = waterPrice + coffeePrice + chocolatePrice + creamPrice;
-            
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Cappucino");
