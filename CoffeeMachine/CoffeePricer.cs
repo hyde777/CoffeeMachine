@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CoffeeMachine
 {
@@ -7,9 +8,9 @@ namespace CoffeeMachine
         public decimal Command(string beverage) =>
             beverage switch
             {
-                "Expresso" => new Expresso().Price(),
-                "Cappucino" => new Cappucino().Price(),
-                "Allongé" => new Elongated().Price(),
+                "Expresso" => new Beverage(new List<IIngredient>() {new Coffee(), new Water()}).Price(),
+                "Cappucino" => new Beverage(new List<IIngredient>{new Coffee(), new Water(), new Cream(), new Chocolate()}).Price(),
+                "Allongé" => new Beverage(new List<IIngredient> { new Coffee(), new Water(), new Water()}).Price(),
                 _ => throw new Exception()
             };
     }

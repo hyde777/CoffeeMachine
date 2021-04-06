@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace CoffeeMachine
 {
-    public class Cappucino : IBeverage
+    public class Beverage : IBeverage
     {
-        private IEnumerable<IIngredient> _ingredients;
+        private readonly List<IIngredient> _ingredients;
 
-        public Cappucino()
+        public Beverage(List<IIngredient> ingredients)
         {
-            _ingredients = new List<IIngredient>{new Coffee(), new Water(), new Cream(), new Chocolate()};
+            _ingredients = ingredients;
         }
 
         public decimal Price()
