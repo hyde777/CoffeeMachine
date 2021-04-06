@@ -38,7 +38,8 @@ namespace CoffeeMachineTests
 
             decimal price = _pricer.Command("Expresso");
 
-            price.Should().Be(expressoPrice);
+            decimal margin = expressoPrice * new decimal(0.3);
+            price.Should().Be(expressoPrice + margin);
         }
 
         [Test]
@@ -48,7 +49,8 @@ namespace CoffeeMachineTests
 
             decimal price = _pricer.Command("Allongé");
 
-            price.Should().Be(elongated);
+            decimal margin = elongated * new decimal(0.3);
+            price.Should().Be(elongated + margin);
         }
 
         [Test]
@@ -57,8 +59,9 @@ namespace CoffeeMachineTests
             decimal cappucinno = _waterPrice + _coffeePrice + _chocolatePrice + _creamPrice;
 
             decimal price = _pricer.Command("Cappucino");
-            
-            price.Should().Be(cappucinno);
+
+            decimal margin = cappucinno * new decimal(0.3);
+            price.Should().Be(cappucinno + margin);
         }
     }
 }

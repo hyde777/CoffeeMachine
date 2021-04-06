@@ -14,7 +14,9 @@ namespace CoffeeMachine
 
         public decimal Price()
         {
-            return _ingredients.Select(x => x.Price()).Sum();
+            decimal price = _ingredients.Select(x => x.Price()).Sum();
+            decimal margin = price * new decimal(0.3);
+            return price + margin;
         }
     }
 }
