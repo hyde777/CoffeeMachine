@@ -6,12 +6,15 @@ namespace CoffeeMachineTests
 {
     public class AcceptanceTests
     {
+        private readonly decimal _waterPrice = new(0.2);
+        private readonly decimal _coffeePrice = new(1);
+        private readonly decimal _creamPrice = new(0.5);
+        private readonly decimal _chocolatePrice = new(1);
+
         [Test]
         public void ShouldPriceAnExpresso()
         {
-            decimal waterPrice = new(0.2);
-            decimal coffeePrice = new(1);
-            decimal expressoPrice = waterPrice + coffeePrice;
+            decimal expressoPrice = _waterPrice + _coffeePrice;
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Expresso");
@@ -22,9 +25,7 @@ namespace CoffeeMachineTests
         [Test]
         public void ShouldPriceAnElongated()
         {
-            decimal waterPrice = new(0.2);
-            decimal coffeePrice = new(1);
-            decimal elongated = waterPrice * 2 + coffeePrice;
+            decimal elongated = _waterPrice * 2 + _coffeePrice;
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Allongé");
@@ -35,11 +36,8 @@ namespace CoffeeMachineTests
         [Test]
         public void ShouldPriceACapuccino()
         {
-            decimal waterPrice = new(0.2);
-            decimal coffeePrice = new(1);
-            decimal creamPrice = new(0.5);
-            decimal chocolatePrice = new(1);
-            decimal cappucinno = waterPrice + coffeePrice + chocolatePrice + creamPrice;
+          
+            decimal cappucinno = _waterPrice + _coffeePrice + _chocolatePrice + _creamPrice;
             ICoffeePricer pricer = new CoffeePricer();
 
             decimal price = pricer.Command("Cappucino");
