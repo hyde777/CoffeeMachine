@@ -28,8 +28,8 @@ namespace CoffeeMachineTests
 
             decimal price = pricer.Command("Allongé");
 
-            decimal expressoPrice = waterPrice * 2 + coffeePrice;
-            price.Should().Be(expressoPrice);
+            decimal elongated = waterPrice * 2 + coffeePrice;
+            price.Should().Be(elongated);
         }
     }
 }
