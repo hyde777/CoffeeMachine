@@ -14,6 +14,11 @@ namespace CoffeeMachine
             _recipes = recipes;
         }
 
-        public decimal Command(string beverage) => _recipes.FirstOrDefault(b => b.Key == beverage).Value.Price();
+        public decimal Command(string beverage)
+        {
+            KeyValuePair<string,IBeverage> recipe = _recipes.FirstOrDefault(b => b.Key == beverage);
+            if (recipe.Value is null) { throw new Exception($"La recette {beverage} n'existe pas");}
+            return recipe.Value.Price();
+        }
     }
 }

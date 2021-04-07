@@ -1,4 +1,5 @@
-﻿using CoffeeMachine;
+﻿using System;
+using CoffeeMachine;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -80,6 +81,16 @@ namespace CoffeeMachineTests
 
             decimal margin = teaPrice * _margin;
             price.Should().Be(teaPrice + margin);
+        }
+
+        [Test]
+        public void ShouldNotPriceStrangeStuff()
+        {
+            string nonExistingRecipes = "Oolong Tea";
+
+            Action act = () => _pricer.Command(nonExistingRecipes);
+            act.Should().Throw<Exception>()
+                .And.Message.Should().Be($"La recette {nonExistingRecipes} n'existe pas");
         }
     }
 }
