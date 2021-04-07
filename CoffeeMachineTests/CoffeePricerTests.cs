@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace CoffeeMachineTests
 {
-    public class AcceptanceTests
+    public class CoffeePricerTests
     {
         private const string CAPPUCINO = "Cappucino";
         private const string EXPRESSO = "Expresso";
@@ -19,7 +19,7 @@ namespace CoffeeMachineTests
         private readonly ICoffeePricer _pricer;
         private decimal _margin;
 
-        public AcceptanceTests()
+        public CoffeePricerTests()
         {
             _pricer = new CoffeePricer(Recipes());
         }
