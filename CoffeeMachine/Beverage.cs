@@ -6,16 +6,18 @@ namespace CoffeeMachine
     public class Beverage : IBeverage
     {
         private readonly List<IIngredient> _ingredients;
+        private readonly decimal _margin;
 
-        public Beverage(List<IIngredient> ingredients)
+        public Beverage(List<IIngredient> ingredients, decimal margin)
         {
             _ingredients = ingredients;
+            _margin = margin;
         }
 
         public decimal Price()
         {
             decimal price = _ingredients.Select(x => x.Price()).Sum();
-            decimal margin = price * new decimal(0.3);
+            decimal margin = price * _margin;
             return price + margin;
         }
     }

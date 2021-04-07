@@ -25,12 +25,12 @@ namespace CoffeeMachineTests
         {
             return new()
             {
-                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()})},
+                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()}, new decimal(0.3))},
                 {
                     CAPPUCINO, new Beverage(new List<IIngredient>
-                        {new Coffee(), new Water(), new Cream(), new Chocolate()})
+                        {new Coffee(), new Water(), new Cream(), new Chocolate()}, new decimal(0.3))
                 },
-                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)})},
+                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)}, new decimal(0.3))},
             };
         }
 
