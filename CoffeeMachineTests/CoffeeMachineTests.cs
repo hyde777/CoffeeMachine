@@ -10,6 +10,7 @@ namespace CoffeeMachineTests
         private const string CAPPUCINO = "Cappucino";
         private const string EXPRESSO = "Expresso";
         private const string ALLONGER = "Allongé";
+        private const string CHOCOLAT = "Chocolat";
         private readonly decimal _waterPrice = new(0.2);
         private readonly decimal _coffeePrice = new(1);
         private readonly decimal _creamPrice = new(0.5);
@@ -33,6 +34,7 @@ namespace CoffeeMachineTests
                         {new Coffee(), new Water(), new Cream(), new Chocolate()}, _margin)
                 },
                 {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)}, _margin)},
+                {CHOCOLAT, new Beverage(new List<IIngredient> {new Chocolate(3), new Water(), new Sugar(), new Milk(2)}, _margin)},
             };
         }
 
@@ -67,6 +69,43 @@ namespace CoffeeMachineTests
 
             decimal margin = cappucinno * _margin;
             price.Should().Be(cappucinno + margin);
+        }
+        
+        [Test]
+        public void ShouldPriceAChocolate()
+        {
+            decimal milkPrice = new (0.4);
+            decimal sugarPrice = new (0.1);
+            decimal cappucinno = _waterPrice + _chocolatePrice * 3 + milkPrice * 2 + sugarPrice;
+
+            decimal price = _pricer.Command(CHOCOLAT);
+
+            decimal margin = cappucinno * _margin;
+            price.Should().Be(cappucinno + margin);
+        }
+    }
+
+    internal class Milk : IIngredient
+    {
+        private const double UNITARY_PRICE = 0.4;
+        private readonly int _amount;
+
+        public Milk(int amount)
+        {
+            _amount = amount;
+        }
+
+        public decimal Price()
+        {
+            return new(UNITARY_PRICE * _amount);
+        }
+    }
+
+    internal class Sugar : IIngredient
+    {
+        public decimal Price()
+        {
+            return new(0.1);
         }
     }
 }
