@@ -17,8 +17,8 @@ namespace CoffeeMachine
         public decimal Price()
         {
             decimal price = _ingredients.Select(x => x.Price()).Sum();
-            decimal margin = price * _margin;
-            return price + margin;
+            decimal taxe = price * _margin;
+            return price + taxe;
         }
     }
 }

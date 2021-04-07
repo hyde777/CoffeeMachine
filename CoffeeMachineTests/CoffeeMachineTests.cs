@@ -15,6 +15,7 @@ namespace CoffeeMachineTests
         private readonly decimal _creamPrice = new(0.5);
         private readonly decimal _chocolatePrice = new(1);
         private readonly ICoffeePricer _pricer;
+        private decimal _margin;
 
         public AcceptanceTests()
         {
@@ -23,14 +24,15 @@ namespace CoffeeMachineTests
 
         private Dictionary<string, IBeverage> Recipes()
         {
+            _margin = new decimal(0.3);
             return new()
             {
-                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()}, new decimal(0.3))},
+                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()}, _margin)},
                 {
                     CAPPUCINO, new Beverage(new List<IIngredient>
-                        {new Coffee(), new Water(), new Cream(), new Chocolate()}, new decimal(0.3))
+                        {new Coffee(), new Water(), new Cream(), new Chocolate()}, _margin)
                 },
-                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)}, new decimal(0.3))},
+                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)}, _margin)},
             };
         }
 
@@ -41,7 +43,7 @@ namespace CoffeeMachineTests
 
             decimal price = _pricer.Command(EXPRESSO);
 
-            decimal margin = expressoPrice * new decimal(0.3);
+            decimal margin = expressoPrice * _margin;
             price.Should().Be(expressoPrice + margin);
         }
 
@@ -52,7 +54,7 @@ namespace CoffeeMachineTests
 
             decimal price = _pricer.Command(ALLONGER);
 
-            decimal margin = elongated * new decimal(0.3);
+            decimal margin = elongated * _margin;
             price.Should().Be(elongated + margin);
         }
 
@@ -63,7 +65,7 @@ namespace CoffeeMachineTests
 
             decimal price = _pricer.Command(CAPPUCINO);
 
-            decimal margin = cappucinno * new decimal(0.3);
+            decimal margin = cappucinno * _margin;
             price.Should().Be(cappucinno + margin);
         }
     }
