@@ -6,7 +6,7 @@ string input = args[0];
 try
 {
     decimal price = new CoffeePricer(new RecipesFactory().Recipes()).Command(input);
-    Console.WriteLine(price);
+    Console.WriteLine($"The ${input} cost {price}€");
 }
 catch(Exception e)
 {
