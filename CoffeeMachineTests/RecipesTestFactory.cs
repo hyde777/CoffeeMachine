@@ -4,7 +4,7 @@ using CoffeeMachine.Ingredients;
 
 namespace CoffeeMachineTests
 {
-    public class RecipesFactory
+    public class RecipesTestFactory
     {
         private const string CAPPUCINO = "Cappucino";
         private const string EXPRESSO = "Expresso";

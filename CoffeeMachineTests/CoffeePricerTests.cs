@@ -20,8 +20,8 @@ namespace CoffeeMachineTests
 
         public CoffeePricerTests()
         {
-            RecipesFactory recipesFactory = new RecipesFactory();
-            _pricer = new CoffeePricer(recipesFactory.Recipes());
+            RecipesTestFactory recipesTestFactory = new RecipesTestFactory();
+            _pricer = new CoffeePricer(recipesTestFactory.Recipes());
         }
 
         [Test]
