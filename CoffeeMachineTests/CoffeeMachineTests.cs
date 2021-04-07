@@ -101,12 +101,4 @@ namespace CoffeeMachineTests
             price.Should().Be(teaPrice + margin);
         }
     }
-
-    internal class Tea : IIngredient
-    {
-        public decimal Price()
-        {
-            return new(2);
-        }
-    }
 }
