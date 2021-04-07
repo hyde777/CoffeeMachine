@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CoffeeMachine;
+﻿using CoffeeMachine;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -17,30 +16,12 @@ namespace CoffeeMachineTests
         private readonly decimal _creamPrice = new(0.5);
         private readonly decimal _chocolatePrice = new(1);
         private readonly ICoffeePricer _pricer;
-        private decimal _margin;
+        private decimal _margin = new (0.3);
 
         public CoffeePricerTests()
         {
-            _pricer = new CoffeePricer(Recipes());
-        }
-
-        private Dictionary<string, IBeverage> Recipes()
-        {
-            _margin = new decimal(0.3);
-            return new()
-            {
-                {EXPRESSO, new Beverage(new List<IIngredient> {new Coffee(), new Water()}, _margin)},
-                {
-                    CAPPUCINO, new Beverage(new List<IIngredient>
-                        {new Coffee(), new Water(), new Cream(), new Chocolate()}, _margin)
-                },
-                {ALLONGER, new Beverage(new List<IIngredient> {new Coffee(), new Water(2)}, _margin)},
-                {CHOCOLAT, new Beverage(new List<IIngredient> {new Chocolate(3), new Water(), new Sugar(), new Milk(2)}, _margin)},
-                {THE, new Beverage(new List<IIngredient>
-                {
-                    new Water(2), new Tea()
-                }, _margin)},
-            };
+            RecipesFactory recipesFactory = new RecipesFactory();
+            _pricer = new CoffeePricer(recipesFactory.Recipes());
         }
 
         [Test]

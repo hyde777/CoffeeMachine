@@ -1,4 +1,6 @@
-﻿namespace CoffeeMachine
+﻿using CoffeeMachine.Ingredients;
+
+namespace CoffeeMachine
 {
     public class Water : IIngredient
     {

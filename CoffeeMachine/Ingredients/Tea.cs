@@ -1,4 +1,4 @@
-﻿namespace CoffeeMachine
+﻿namespace CoffeeMachine.Ingredients
 {
     public class Tea : IIngredient
     {
